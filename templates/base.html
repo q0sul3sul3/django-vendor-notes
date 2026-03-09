@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Notes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Vendor Notes</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">Vendors</a>
+            <a class="nav-item nav-link" href="/export/">Export to Excel</a>
+            <a class="nav-item nav-link" href="/import/vendors/">Import Vendors</a>
+            <a class="nav-item nav-link" href="/import/notes/">Import Notes</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

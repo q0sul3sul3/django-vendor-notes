@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Import {% if import_type == 'vendors' %}Vendors{% else %}Notes{% endif %} from CSV</h1>
+
+<div class="alert alert-info">
+    <h5>How to use:</h5>
+    {% if import_type == 'vendors' %}
+    <p>Upload a CSV file with vendor data. <strong>Required columns:</strong> <code>name</code>, <code>contact_email</code>, <code>phone</code></p>
+    {% else %}
+    <p>Upload a CSV file with notes data. <strong>Required columns:</strong> <code>vendor</code>, <code>title</code>, <code>content</code></p>
+    <p class="mb-0"><em>Note: The vendor must already exist in the system.</em></p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <strong>Example CSV format:</strong>
+    </div>
+    <div class="card-body">
+        <pre class="mb-0">{% if import_type == 'vendors' %}name,contact_email,phone
+ABC Corp,contact@abc.com,123-456-7890
+XYZ Ltd,info@xyz.com,098-765-4321{% else %}vendor,title,content
+ABC Corp,Meeting Notes,Discussed project timeline
+XYZ Ltd,Contract Review,Terms need clarification{% endif %}</pre>
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="csv_file"><strong>CSV File:</strong></label>
+        <input type="file" name="csv_file" id="csv_file" class="form-control" required>
+        <small class="form-text text-muted">Select a CSV file to import</small>
+    </div>
+    <div class="form-group">
+        <label for="folder_path"><strong>Folder Path:</strong></label>
+        <input type="text" name="folder_path" id="folder_path" value="uploads" class="form-control">
+        <small class="form-text text-muted">Where to store the uploaded file</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Import</button>
+</form>
+{% endblock %}
